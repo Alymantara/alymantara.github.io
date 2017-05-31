@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+	<title>J.V. Hernández Santisteban Website</title>
+
+
+	<!-- Bootstrap -->
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+	<!-- Icon font -->
+	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Alice|Open+Sans:400,300,700">
+	<!-- Custom styles -->
+	<link rel="stylesheet" href="assets/css/styles.css">
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-76532568-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+	<!--[if lt IE 9]> <script src="assets/js/html5shiv.js"></script> <![endif]-->
+</head>
+<body>
+
+<header id="header">
+	<div id="head" class="parallax" parallax-speed="1">
+		<h1 id="logo" class="text-center">
+			<span class="title">Juan V. Hernández Santisteban</span>
+			<span class="tagline">Astrophysics PhD student<br>
+				<a href="">University of Southampton</a></span>
+		</h1>
+	</div>
+
+	<nav class="navbar navbar-default navbar-sticky">
+		<div class="container-fluid">
+
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+			</div>
+
+			<div class="navbar-collapse collapse">
+
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="about.html">About</a></li>
+					<li class="dropdown">
+						<a href="research.html" class="dropdown-toggle" data-toggle="dropdown">Research<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="research.html">Research</a></li>
+							<li><a href="j1433.html">J1433 Nature</a></li>
+						</ul>
+					</li>
+					<li><a href="teaching.html">Resources</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Outreach <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li><a href="outreach.html">Astrodome</a></li>
+							<li><a href="outreach.html">SAM</a></li>
+
+						</ul>
+					</li>
+					<li><a href="gallery.html">Tenerife Gallery</a></li>
+				</ul>
+
+			</div><!--/.nav-collapse -->
+		</div>
+	</nav>
+</header>
+
+<main id="main">
+
+	<div class="container">
+
+		<div class="row topspace">
+		<div class="col-sm-8 col-sm-offset-2">
+			<!-- Article main content -->
+			<article class="post">
+				<header class="page-header">
+					<h1 class="page-title">How to install TRM-Doppler</h1>
+					<h3 class="page-title">A trial and error cookbook</h3>
+				</header>
+
+
+				<p align="justify">
+				This cookbook is intended to install Tom Marsh's software with the aim of using the
+				Doppler tomography software that he ported to python. In his website, he has a very
+				<a href="http://deneb.astro.warwick.ac.uk/phphsaap/software/" target="_blank">detailed explanation</a>
+				of every step (I will not repeat it). If you want to understand
+				the "why" of every step, please feel free to check the documentation.
+				However, it is known (even by Tom Marsh himself)
+				that sometimes there are things that go wrong (expect it to happen). This cookbook compiles (pun intended) some
+				of the lessons learnt in the process by Arraan Shaw and myself to successfully install this
+				fantastic code. The cookbook is designed as if you are installing the software from scratch
+				in a brand new machine. Some of the steps might be redundant but for completeness sake,
+				I have added every single step in my log. Hope this helps anyone who wants to install it.
+				</p>
+
+				<p>
+					First let's install all the dependencies required:
+					<pre class="prettyprint lang-sh"><code>
+sudo apt-get install autoconf automake libtool git gfortran libreadline-dev
+sudo apt-get install libxerces-c-dev libpcre3-dev libfftw3-dev libcfitsio-dev
+sudo apt-get install libcurl4-gnutls-dev xorg-dev csh libpng-dev
+sudo apt-get install g++ libpcre3 libpcre3-dev python-plplot python-pip
+sudo apt-get install python-sphinx python-numpy python-astropy python-matplotlib
+sudo apt-get install ipython python-scipy cython
+					</code></pre>
+Sometimes, the <strong>astropy</strong> and <strong>cython</strong> versions are not the latest ones and will
+have conflicts when running the Doppler scripts. Therefore, let's force an update to the latest version:
+<pre class="prettyprint lang-sh"><code>sudo pip install --upgrade astropy
+sudo pip install --upgrade cython</code></pre>
+</p>
+<p align="justify">
+We need to add environment variables for the different compilers as well as
+directions to PGPLOT and the installation directories.
+<pre class="prettyprint lang-sh"><code>
+# Compilers
+export CC=/usr/bin/gcc
+export CXX=/usr/bin/g++
+export PERL=/usr/bin/perl
+export FC=/usr/local/bin/gfortran
+
+# PGPLOT
+export PGPLOT_DIR=/usr/local/lib
+export PGPLOT_DEV=/Xserve
+
+#TOM MARSH SOFTWARE
+export TRM_SOFTWARE=/home/juan/trm_software
+export CPPFLAGS="-I/home/juan/trm_software/include -I/usr/local/src/pgplot/include"
+export LDFLAGS="-L/home/juan/trm_software/lib -L/usr/local/src/pgplot/lib"
+export PYTHONPATH=$TRM_SOFTWARE/lib/python2.7/site-packages
+export LD_LIBRARY_PATH=/usr/local/src/pgplot/lib:/usr/local/lib:$TRM_SOFTWARE/lib:$LD_LIBRARY_PATH
+
+</code></pre>
+</p>
+
+<p align="justify">
+Now, the trickiest part of the whole installation: <strong>PGPLOT</strong>. First,
+let's create following folders:
+<pre class="prettyprint lang-sh"><code>
+sudo mkdir /usr/local/src
+sudo mkdir /usr/local/src/pgplot
+sudo mkdir /usr/local/pgplot
+sudo mkdir /usr/local/src/pgplot/lib
+sudo mkdir /usr/local/src/pgplot/include
+</code></pre>
+Then, let's download the latest version of pgplot from <a href="ftp://ftp.astro.caltech.edu/pub/pgplot/pgplot5.2.tar.gz" target="_blank">here</a>. The filename should be something like <strong>pgplot5.2.tar.gz</strong>. Once you have this,
+then you need to download Tom's script to install pgplot. Go here to download  <a href="http://deneb.astro.warwick.ac.uk/phphsaap/software/PGPLOT_INSTALL" target="_blank">PGPLOT_INSTALL.sh</a>. Go to the
+directory where you save the script and run the following commands. Make sure to point towards the directory where <strong>pgplot5.2.tar.gz</strong> resides.<BR>
+
+<pre class="prettyprint lang-sh"><code>
+chmod u+x PGPLOT_INSTALL.csh
+sudo ./PGPLOT_INSTALL.csh /home/juan/Downloads/pgplot5.2.tar.gz /usr/local/src/pgplot/ /usr/local/pgplot/ gfortran
+</code></pre>
+</p>
+
+<p align="justify">
+At this point two things might have happened:
+<li>1) The script succesfully ran and no errors ocurred (it is known to happen). You are lucky and can move
+	on to next part. </li>
+<li>2) The script had an error on the last part and you might need to do this by hand.</li>
+This requires to do soft links to the libraries.
+<pre class="prettyprint lang-sh"><code>
+cd /usr/local/src/pgplot/lib
+sudo ln -sf /usr/local/pgplot/libpgplot.so
+sudo ln -sf /usr/local/pgplot/libpgplot.a
+sudo ln -sf /usr/local/pgplot/libcpgplot.a
+cd ../include/
+sudo ln -sf /usr/local/pgplot/cpgplot.h
+</code></pre>
+Whatever happens, try the demo to check if pgplot works
+<pre class="prettyprint lang-sh"><code>
+cd /usr/local/pgplot
+./pgdemo1
+</code></pre>
+</p>
+
+<p align="justify">
+The next step is to install <strong>SLALIB</strong>. For this you need to send
+kind email to Tom Marsh so he can provide you with a link to the download file.
+Check the documentation to see why this is. Anyway, once you have it. Go to the directory
+where you saved it and run the following code:
+<pre class="prettyprint lang-sh"><code>
+tar -zxvf sla.tar.gz
+cd sla-1.0.4
+./configure
+make
+sudo make install
+sudo updatedb
+</code></pre>
+
+</p>
+
+<p align="justify">
+At this point, you are ready to install all the software.
+</p>
+			</article>
+			<!-- /Article -->
+		</div>
+		</div>
+	</div>	<!-- /container -->
+
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 widget">
+				<h3 class="widget-title">Contact</h3>
+				<div class="widget-body">
+					<p>
+						<a href="mailto:#">j.v.hernandez@soton.ac.uk</a><br>
+						<br>
+						Building 46 - 4207<br>
+						Department of Physics and Astronomy<br>
+						Highfield Campus<br>
+						University of Southampton<br>
+
+					</p>
+				</div>
+			</div>
+
+			<div class="col-md-4 widget">
+				<h3 class="widget-title">Follow me</h3>
+				<div class="widget-body">
+					<p class="follow-me-icons">
+						<a href="https://twitter.com/Alymantara" target="_blank"><i class="fa fa-twitter fa-2"></i></a>
+						<a href="https://github.com/Alymantara" target="_blank"><i class="fa fa-github fa-2"></i></a>
+						<a href="https://www.facebook.com/venimakio" target="_blank"><i class="fa fa-facebook fa-2"></i></a>
+						<a href="https://instagram.com/alymantara" target="_blank"><i class="fa fa-instagram fa-2"></i></a>
+						<a href="https://uk.linkedin.com/in/jvhernandez" target="_blank"><i class="fa fa-linkedin fa-2"></i></a>
+					</p>
+				</div>
+			</div>
+
+			<div class="col-md-4 widget">
+				<h3 class="widget-title"> A madman...</h3>
+				<div class="widget-body">
+					<p>
+						Á stjörnuhraða<br>
+						Inni í hjarta springur, flugvélarbrak<br>
+						Oní jörðu syngur<br>
+						Ég óska mér og loka nú augunum<br>
+						Já gerðu það, lágfara dans<br>
+						Allt gleymist í smásmá stund og rætist samt<br>
+						</p>
+				</div>
+			</div>
+
+<!-- 			<div class="col-md-3 widget">
+				<h3 class="widget-title">Form widget</h3>
+				<div class="widget-body">
+					<p>+234 23 9873237<br>
+						<a href="mailto:#">j.v.hernandez@soton.ac.uk</a><br>
+						<br>
+						234 Hidden Pond Road, Ashland City, TN 37015
+					</p>
+				</div>
+			</div> -->
+
+		</div> <!-- /row of widgets -->
+	</div>
+</footer>
+
+<footer id="underfooter">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+				<p>
+				<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+				</div>
+			</div>
+
+			<div class="col-md-6 widget">
+				<div class="widget-body">
+					<p class="text-right">
+						Copyright &copy; 2015-2016, Juan V. Hernández Santisteban<br>
+						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> </p>
+				</div>
+			</div>
+
+		</div> <!-- /row of widgets -->
+	</div>
+</footer>
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="http://cdn=rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script src="assets/js/template.js"></script>
+</body>
+</html>
