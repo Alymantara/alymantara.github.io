@@ -91,43 +91,43 @@
 
 
 				<p>
-					<pre class="prettyprint lang-sh"><code>
+					<pre class="prettyprint lang-py"><code>
 import seaborn as sns
 flatui = ["#9b59b6", "#3498db", "#95a5a6", "#e74c3c", "#34495e", "#2ecc71"]
 sns.set_palette(flatui)
 					</code></pre>
 
 					How to form a structured array AND add new rows to it
-					<pre class="prettyprint lang-sh"><code>
+					<pre class="prettyprint lang-py"><code>
 grid = n.zeros(0,dtype=[('den', 'f4'), ('temp', 'f4'), ('u', 'f4'),('g', 'f4'),('r', 'f4')])
 grid = n.append(grid, n.array([(den,temp,u,g,r)], dtype=grid.dtype))
 					</code></pre>
 
 					Add a new field to a structured array:
-					<pre class="prettyprint lang-python"><code>
+					<pre class="prettyprint lang-py"><code>
 from numpy.lib.recfunctions import append_fields
 spec=append_fields(spec,'rot',ymodel,usemask=False)
 					</code></pre>
 
 					To make bigger and clearer minor ticks in plots use:
-					<pre class="prettyprint lang-sh"><code>
+					<pre class="prettyprint lang-py"><code>
 ax.tick_params('both', length=10, width=2, which='major')
 ax.tick_params('both', length=5, width=1, which='minor')
 					</code></pre>
 
 					Sort two (or more) arrays simultaneously:
-					<pre class="prettyprint lang-sh"><code>
+					<pre class="prettyprint lang-py"><code>
 list1, list2 = zip(*sorted(zip(list1, list2)))
 					</code></pre>
 
 					Sort by indices<br>
-					<pre class="prettyprint lang-sh"><code>
+					<pre class="prettyprint lang-py"><code>
 wav = wav[inds]
 inds = wav.argsort()
 grid = grid[inds]
 					</code></pre>
 
-					<pre class="prettyprint lang-sh"><code>
+					<pre class="prettyprint lang-py"><code>
 print('{}: {:7.3f} {:7.3f} {:7.3f} {:7.3f} {:7.3f}'.format(spec['filename'], res.params['lam0'].value,
                                       res.params['int1'].value, res.params['int2'].value,
                                       res.params['width1'].value, res.params['width2'].value))
