@@ -85,23 +85,58 @@
 			<!-- Article main content -->
 			<article class="post">
 				<header class="page-header">
-					<h1 class="page-title">Resources</h1>
-					<h3 class="page-title">A page with useful links</h3>
+					<h1 class="page-title">Python tricks</h1>
+					<h3 class="page-title">my personal go to</h3>
 				</header>
 
 
-				<p align="justify">
-				Here you can find some useful links of a wide range of topics.
-				<li><a href="trm-doppler.html">TRM-DOPPLER Installation Cookbook</a>: A quick
-					cookbook to install from scratch Tom Marsh's new Doppler tomography
-					software in a Linux machine.
-				</li><br>
-				<li><a href="http://www.soton.ac.uk/~sdc1g08/molly.html">MOLLY COOKBOOK</a>: How to prepare a series of spectra for use of Doppler tomography in
-				<strong>MOLLY</strong></li><br>
-				<li><a href="http://github.com/Alymantara/stis_photons">STIS_PHOTONS</a>: Program that assing wavelengths to individual photons of data products HST/STIS TIME_TAG event files.</li><br>
-				<li><a href="http://github.com/Alymantara/python_tricks.html">My Python tricks</a>: Few lines of code I use over and over again and still unable to remember. </li>
-				<li>TBD: </li>
-				</p>
+				<p>
+					<pre class="prettyprint lang-sh"><code>
+						import seaborn as sns
+						flatui = ["#9b59b6", "#3498db", "#95a5a6", "#e74c3c", "#34495e", "#2ecc71"]
+						sns.set_palette(flatui)
+					</code></pre>
+
+					How to form a structured array AND add new rows to it
+					<pre class="prettyprint lang-sh"><code>
+						grid = n.zeros(0,dtype=[('den', 'f4'), ('temp', 'f4'), ('u', 'f4'),('g', 'f4'),('r', 'f4')])
+						grid = n.append(grid, n.array([(den,temp,u,g,r)], dtype=grid.dtype))
+					</code></pre>
+
+					Add a new field to a structured array:
+					<pre class="prettyprint lang-sh"><code>
+						from numpy.lib.recfunctions import append_fields
+						spec=append_fields(spec,'rot',ymodel,usemask=False)
+					</code></pre>
+
+					To make bigger and clearer minor ticks in plots use:
+					<pre class="prettyprint lang-sh"><code>
+						ax.tick_params('both', length=10, width=2, which='major')
+						ax.tick_params('both', length=5, width=1, which='minor')
+					</code></pre>
+
+					Sort two (or more) arrays simultaneously:
+					<pre class="prettyprint lang-sh"><code>
+						list1, list2 = zip(*sorted(zip(list1, list2)))
+					</code></pre>
+
+					Sort by indices<br>
+					<pre class="prettyprint lang-sh"><code>
+						wav = wav[inds]
+						inds = wav.argsort()
+						grid = grid[inds]
+					</code></pre>
+
+					<pre class="prettyprint lang-sh"><code>
+						print('{}: {:7.3f} {:7.3f} {:7.3f} {:7.3f} {:7.3f}'.format(spec['filename'], res.params['lam0'].value,
+                                      res.params['int1'].value, res.params['int2'].value,
+                                      res.params['width1'].value, res.params['width2'].value))
+					</code></pre>
+
+					Convert PDF to PNG
+					<pre class="prettyprint lang-sh"><code>
+						convert -density 150 vel_00001.pdf -quality 90 vel_00001.png
+					</code></pre>
 
 			</article>
 			<!-- /Article -->
@@ -118,12 +153,13 @@
 				<h3 class="widget-title">Contact</h3>
 				<div class="widget-body">
 					<p>
-						<a href="mailto:#">j.v.hernandez@uva.nl</a><br>
+						<a href="mailto:#">j.v.hernandez@soton.ac.uk</a><br>
 						<br>
-						Science Park 904<br>
-						Anton Pannekoek Institute<br>
-						University of Amsterdam<br>
-						1098 XH Amsterdam, Netherlands<br>
+						Building 46 - 4207<br>
+						Department of Physics and Astronomy<br>
+						Highfield Campus<br>
+						University of Southampton<br>
+
 					</p>
 				</div>
 			</div>
@@ -184,7 +220,7 @@
 			<div class="col-md-6 widget">
 				<div class="widget-body">
 					<p class="text-right">
-						Copyright &copy; 2012-2017, Juan V. Hernández Santisteban<br>
+						Copyright &copy; 2015-2016, Juan V. Hernández Santisteban<br>
 						Design: <a href="http://www.gettemplate.com" rel="designer">Initio by GetTemplate</a> </p>
 				</div>
 			</div>
