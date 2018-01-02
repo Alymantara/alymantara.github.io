@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport"    content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+	<title>J.V. Hernández Santisteban Website</title>
+
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<link rel="stylesheet"  href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"></style>
+	<script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <header id="header">
+    	<div id="head" class="parallax" parallax-speed="1">
+    		<h1 id="logo" class="text-center">
+    			<span class="title">Juan V. Hernández Santisteban</span>
+    			<span class="tagline">Postdoctoral Researcher<br>
+    			<a href="http://www.uva.nl">Anton Pannekoek Intstitute, University of Amsterdam</a></span>
+    		</h1>
+    		<h5 id="logo" class="text-center">
+    		<a href="j1433.html" style="font-size: 15px">English</a> &nbsp;&nbsp;&nbsp;<a href="j1433_es.html"style="font-size: 15px">Español</a>
+    		</h5>
+    	</div>
+
+    	<nav class="navbar navbar-default navbar-sticky">
+    		<div class="container-fluid">
+
+    			<div class="navbar-header">
+    				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+    			</div>
+
+    			<div class="navbar-collapse collapse">
+
+    				<ul class="nav navbar-nav">
+    					<li class="active"><a href="index.html">Home</a></li>
+    					<li><a href="about.html">About</a></li>
+    					<li class="dropdown">
+    						<a href="research.html" class="dropdown-toggle" data-toggle="dropdown">Research<b class="caret"></b></a>
+    						<ul class="dropdown-menu">
+    							<li><a href="research.html">Research</a></li>
+    							<li><a href="j1433.html">J1433 Nature</a></li>
+    						</ul>
+    					</li>
+    					<li><a href="resources.html">Resources</a></li>
+    					<li class="dropdown">
+    						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Outreach <b class="caret"></b></a>
+    						<ul class="dropdown-menu">
+    							<li><a href="outreach.html">Astrodome</a></li>
+    							<li><a href="outreach.html">SAM</a></li>
+
+    						</ul>
+    					</li>
+    					<li><a href="gallery.html">Tenerife Gallery</a></li>
+    				</ul>
+
+    			</div><!--/.nav-collapse -->
+    		</div>
+    	</nav>
+    </header>
+
+    <main id="main">
+    <article class="col-sm-16 maincontent">
+    <div class="table-responsive" width="80%">
+        <table id="myTable" class="display table" width="80%" >
+
+        <thead>
+           <tr>
+             <th>ENO</th>
+             <th>EMPName</th>
+             <th>Country</th>
+             <th>Salary</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr>
+             <td>001</td>
+             <td>Anusha</td>
+             <td>India</td>
+             <td>10000</td>
+           </tr>
+           <tr>
+             <td>002</td>
+             <td>Charles</td>
+             <td>United Kingdom</td>
+             <td>28000</td>
+           </tr>
+           <tr>
+             <td>003</td>
+             <td>Sravani</td>
+             <td>Australia</td>
+             <td>7000</td>
+           </tr>
+            <tr>
+             <td>004</td>
+             <td>Amar</td>
+             <td>India</td>
+             <td>18000</td>
+           </tr>
+           <tr>
+             <td>005</td>
+             <td>Lakshmi</td>
+             <td>India</td>
+             <td>12000</td>
+           </tr>
+           <tr>
+             <td>006</td>
+             <td>James</td>
+             <td>Canada</td>
+             <td>50000</td>
+           </tr>
+
+            <tr>
+             <td>007</td>
+             <td>Ronald</td>
+             <td>US</td>
+             <td>75000</td>
+           </tr>
+           <tr>
+             <td>008</td>
+             <td>Mike</td>
+             <td>Belgium</td>
+             <td>100000</td>
+           </tr>
+           <tr>
+             <td>009</td>
+             <td>Andrew</td>
+             <td>Argentina</td>
+             <td>45000</td>
+           </tr>
+
+             <tr>
+             <td>010</td>
+             <td>Stephen</td>
+             <td>Austria</td>
+             <td>30000</td>
+           </tr>
+           <tr>
+             <td>011</td>
+             <td>Sara</td>
+             <td>China</td>
+             <td>750000</td>
+           </tr>
+           <tr>
+             <td>012</td>
+             <td>JonRoot</td>
+             <td>Argentina</td>
+             <td>65000</td>
+           </tr>
+         </tbody>
+
+    </table>
+    </div>
+
+    <div id="container"></div>
+</article>
+</main>
+
+</body>
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable();
+});
+</script>
+
+<script>
+$.get('data.csv', function(data) {
+
+// start the table
+var html = '<table id="example"  class="display" cellspacing="0" width="100%">';
+
+// split into lines
+var rows = data.split("\n");
+
+// parse lines
+rows.forEach( function getvalues(ourrow) {
+
+// start a table row
+html += "<tr>";
+
+// split line into columns
+var columns = ourrow.split(",");
+
+html += "<td>" + columns[0] + "</td>";
+html += "<td>" + columns[1] + "</td>";
+html += "<td>" + columns[2] + "</td>";
+
+// close row
+html += "</tr>";
+})
+// close table
+html += "</table>";
+
+// insert into div
+$('#container').append(html);
+
+});
+</script>
+</html>
