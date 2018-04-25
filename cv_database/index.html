@@ -26,6 +26,12 @@
       <h2>Database of Cataclysmic Variables from the final Ritter & Kolb catalogue.</h2>
 
       <p>Powered by Derek Eder's <a href='https://github.com/derekeder/csv-to-html-table'>csv-to-html-table</a>.</p>
+      <p> The distances are obtained from GAIA DR2 by transforming the parallaxes and its errors are calculated by
+            d = 1/parallax and d_err = parallax_error/parallax^2. The units are in parsec. Some objects have not been found inside a 5 arcsec cone around
+            the R&K coordinates hence, their distances are labeled as nan. For large distances (small parallaxes), it might show negative
+            distances. I only show a few parameters of the R&K catalogue. I have used gaia
+            DISCLAIMER: This should only be used as a quick reference only. </p>
+
 
       <div id='table-container'></div>
 
@@ -58,7 +64,7 @@
       }
 
       CsvToHtmlTable.init({
-        
+
         csv_path: 'data/gaia_cvs_distances.csv',
         element: 'table-container',
         allow_download: true,
